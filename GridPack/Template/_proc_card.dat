@@ -36,7 +36,7 @@ define vl = ve vm vt
 define vl~ = ve~ vm~ vt~
 
 import model  lq_met
-define sm = c c~ s s~ mu+ mu- vm vm~
+define sm = u u~ d d~ e+ e- ve ve~
 generate p p > m1 m1~ QCD=2 QED=0 NP=0, m1 > sm sm, (m1~ > ~dm ~x1~, ~\
 x1~ > sm sm ~dm)
 add process p p > m1 m1~ QCD=2 QED=0 NP=0, m1~ > sm sm, (m1 > ~dm ~x1 \

@@ -179,7 +179,7 @@ vector <float> W_HTBin(std::string FileLoc){
     
     for (int i=0; i <WSize;i++){
         
-        TFile * File_W = new TFile((FileLoc+W_ROOTFiles[i]).c_str());
+        TFile * File_W = TFile::Open((FileLoc+W_ROOTFiles[i]).c_str());
         TH1F * Histo_W = (TH1F*) File_W->Get("hcount");
         W_events.push_back(Histo_W->GetBinContent(2));
         cout<<"Number of proccessed evenets for "<<W_ROOTFiles[i]<<" = "<<Histo_W->GetBinContent(2)<<"\n";
@@ -199,7 +199,7 @@ vector <float> DY_HTBin(std::string FileLoc){
     
     for (int i=0; i < DYSize;i++){
         
-        TFile * File_DY = new TFile((FileLoc+DY_ROOTFiles[i]).c_str());
+        TFile * File_DY = TFile::Open((FileLoc+DY_ROOTFiles[i]).c_str());
         TH1F * Histo_DY= (TH1F*) File_DY->Get("hcount");
         DY_events.push_back(Histo_DY->GetBinContent(2));
         cout<<"Number of proccessed evenets for "<<DY_ROOTFiles[i]<<" = "<<Histo_DY->GetBinContent(2)<<"\n";
@@ -221,7 +221,7 @@ vector <float> W_PTBinNLO(std::string FileLoc){
     
     for (int i=0; i <WSizeNLO;i++){
         
-        TFile * File_WNLO = new TFile((FileLoc+W_ROOTFilesNLO[i]).c_str());
+        TFile * File_WNLO = TFile::Open((FileLoc+W_ROOTFilesNLO[i]).c_str());
         TH1F * Histo_WNLO = (TH1F*) File_WNLO->Get("hcount");
         W_eventsNLO.push_back(Histo_WNLO->GetBinContent(2));
         cout<<"Number of proccessed evenets for "<<W_ROOTFilesNLO[i]<<" = "<<Histo_WNLO->GetBinContent(2)<<"\n";

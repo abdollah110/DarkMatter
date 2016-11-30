@@ -9,7 +9,13 @@ int main(int argc, char** argv) {
     using namespace std;
     
     std::string out = *(argv + 1);
-    
+ 
+    std::string SampleLoc=getenv("SampleLoc");
+    std::string RootName_Prefix=getenv("RootName_Prefix"); 
+    std::string Working_Dir=getenv("Working_Dir");
+    std::string Input_Loc=getenv("Input_Loc");
+
+   
     cout << "\n\n\n OUTPUT NAME IS:    " << out << endl;     //PRINTING THE OUTPUT name
     TFile *fout = TFile::Open(out.c_str(), "RECREATE");
     
@@ -17,35 +23,44 @@ int main(int argc, char** argv) {
     myMap2 = new map<string, TH2F*>();
     
     std::vector<string> input;
+    std::string tmp_name="";
+
     for (int f = 2; f < argc; f++) {
-        input.push_back(*(argv + f));
+    
+        if(Input_Loc=="AFS")
+        tmp_name=RootName_Prefix + *(argv+f);
+        else if(Input_Loc=="EOS")
+        tmp_name=RootName_Prefix+SampleLoc+"/"+ *(argv+f);
+        else std::cout<<"There is no valid name for location of input files"<<std::endl;
+
+        input.push_back(tmp_name);
         cout << "\n INPUT NAME IS:   " << input[f - 2] << "\n";
     }
     
     
-    TFile * PUData= TFile::Open("../interface/pileup-hists/MyDataPileupHistogram2016.root");
+    TFile * PUData= TFile::Open((Working_Dir+"/"+"../interface/pileup-hists/MyDataPileupHistogram2016.root").c_str());
     TH1F * HistoPUData= (TH1F *) PUData->Get("pileup");
     HistoPUData->Scale(1.0/HistoPUData->Integral());
     
-    TFile * PUMC= TFile::Open("../interface/pileup-hists/Sprin16_MC.root");
+    TFile * PUMC= TFile::Open((Working_Dir+"/"+"../interface/pileup-hists/Sprin16_MC.root").c_str());
     TH1F * HistoPUMC= (TH1F *) PUMC->Get("pileup");
     HistoPUMC->Scale(1.0/HistoPUMC->Integral());
     
-    TFile * MuCorrId= TFile::Open("../interface/pileup-hists/MuonID_Z_RunBCD_prompt80X_7p65.root");
+    TFile * MuCorrId= TFile::Open((Working_Dir+"/"+"../interface/pileup-hists/MuonID_Z_RunBCD_prompt80X_7p65.root").c_str());
     //    TFile * MuCorrId= TFile::Open("../interface/pileup-hists/MuonID_Z_2016runB_2p6fb.root");
     TH2F * HistoMuId= (TH2F *) MuCorrId->Get("MC_NUM_TightIDandIPCut_DEN_genTracks_PAR_pt_spliteta_bin1/pt_abseta_ratio");
     
-    TFile * MuCorrIso= TFile::Open("../interface/pileup-hists/MuonIso_Z_RunBCD_prompt80X_7p65.root");
+    TFile * MuCorrIso= TFile::Open((Working_Dir+"/"+"../interface/pileup-hists/MuonIso_Z_RunBCD_prompt80X_7p65.root").c_str());
     //    TFile * MuCorrIso= TFile::Open("../interface/pileup-hists/MuonISO_Z_2016runB_2p6fb.root");
     TH2F * HistoMuIso= (TH2F *) MuCorrIso->Get("MC_NUM_TightRelIso_DEN_TightID_PAR_pt_spliteta_bin1/pt_abseta_ratio");
     
-    TFile * MuCorrTrg= TFile::Open("../interface/pileup-hists/SingleMuonTrigger_Z_RunBCD_prompt80X_7p65.root");
+    TFile * MuCorrTrg= TFile::Open((Working_Dir+"/"+"../interface/pileup-hists/SingleMuonTrigger_Z_RunBCD_prompt80X_7p65.root").c_str());
     //    TFile * MuCorrTrg= TFile::Open("../interface/pileup-hists/SingleMuonTrigger_Z_RunCD_Reco76X_Feb15.root");
     TH2F * HistoMuTrg= (TH2F *) MuCorrTrg->Get("Mu45_eta2p1_PtEtaBins_Run274094_to_276097/efficienciesDATA/pt_abseta_DATA");
     
     
     
-    TFile * KFactor= TFile::Open("../interface/pileup-hists/kfactors.root");
+    TFile * KFactor= TFile::Open((Working_Dir+"/"+"../interface/pileup-hists/kfactors.root").c_str());
     TH1F * WLO= (TH1F *) KFactor->Get("WJets_LO/inv_pt");
     TH1F * WNLO= (TH1F *) KFactor->Get("EWKcorr/W");
     TH1F * ZLO= (TH1F *) KFactor->Get("ZJets_LO/inv_pt");
@@ -70,7 +85,7 @@ int main(int argc, char** argv) {
         cout.precision(6);
         
         
-        std::string ROOTLoc= "/Users/abdollah1/GIT_abdollah110/DarkMatter/ROOT80X/";
+        std::string ROOTLoc= RootName_Prefix+SampleLoc+"/";
         vector<float> DY_Events = DY_HTBin(ROOTLoc);
         vector<float> W_Events = W_HTBin(ROOTLoc);
         //        vector<float> W_EventsNLO = W_PTBinNLO(ROOTLoc); //This is for the NLO samples (as the stat is too low we do not use them)
@@ -214,6 +229,7 @@ int main(int argc, char** argv) {
             float WBosonKFactor=1;
             float ZBosonPt=0;
             float ZBosonKFactor=1;
+            
             for (int igen=0;igen < nMC; igen++){
                 if (mcPID->at(igen) == 6 && mcStatus->at(igen) ==62) GenTopPt=mcPt->at(igen) ;
                 if (mcPID->at(igen) == -6 && mcStatus->at(igen) ==62) GenAntiTopPt=mcPt->at(igen);
@@ -231,7 +247,8 @@ int main(int argc, char** argv) {
             float LumiWeight = 1;
             float GetGenWeight=1;
             float PUWeight = 1;
-            
+           
+
             if (!isData){
                 
                 if (HistoTot) LumiWeight = weightCalc(HistoTot, InputROOT, genHT,WBosonPt, W_Events, DY_Events,W_EventsNLO);
@@ -261,6 +278,7 @@ int main(int argc, char** argv) {
                     plotFill("HLT",qq,60,0,60);
             }
             
+           
             
             //###############################################################################################
             //  Doing MuTau Analysis
@@ -310,6 +328,7 @@ int main(int argc, char** argv) {
                     numBJet++;
             }
             
+          
             
             //###########       Z boson Veto   ###########################################################
             int numZboson=0;

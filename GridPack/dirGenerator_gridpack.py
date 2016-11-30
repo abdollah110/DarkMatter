@@ -2,7 +2,9 @@ import os
 import shutil
 import fileinput
 
-prodAddress='cards/production/13TeV/DarkMatter_Codex/'
+generation=1
+
+prodAddress='cards/production/13TeV/DarkMatter_Codex_gen%s/'%(generation)
 
 run_card='Template/_run_card.dat'
 proc_card='Template/_proc_card.dat'
@@ -10,8 +12,9 @@ extramodels='Template/_extramodels.dat'
 customizecards='Template/_customizecards.dat'
 
 
+
 def TriName(TriMass):
-    DirName= 'Codex_LQ%s_DM_%s_X_%s_gen2'%(TriMass[0],TriMass[1],TriMass[2])
+    DirName= 'Codex_LQ%s_DM_%s_X_%s_gen%s'%(TriMass[0],TriMass[1],TriMass[2],TriMass[3])
     AddressName=prodAddress+DirName
     return DirName,AddressName
 
@@ -148,6 +151,7 @@ FullTriMass=[
 
 
 for TriMass in FullTriMass:
+    TriMass.append(generation)
     create_Directory(TriMass)
     create_run_card(TriMass)
     create_extramodels(TriMass)
