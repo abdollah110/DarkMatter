@@ -85,8 +85,8 @@ def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD):
         print "--------------------------------------------------->     Processing Codex1400"
         tDirectory.cd()
         
-        Name= "Codex1400"
-        NameOut= "Codex1400"
+        Name= "DM_Codex_1400"
+        NameOut= "DM_Codex_1400"
         
         NormFile= _FileReturn(Name, channel,NameCat, NormMC)
         NormHisto=NormFile.Get("HISTO")
@@ -303,13 +303,13 @@ def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD):
 
 if __name__ == "__main__":
     
-    PlotName= ["_tmass_MuMet","_tmass_JetMet","_tmass_LQMet","_LepEta","_LepPt","_JetPt","_JetEta","_MET","_LQMass","_dPhi_Jet_Met","_dPhi_Mu_Met","_LQEta"]
+    PlotName= ["_tmass_MuMet","_tmass_JetMet","_tmass_LQMet","_LepEta","_LepPt","_JetPt","_JetEta","_MET","_LQMass","_dPhi_Jet_Met","_dPhi_Mu_Met","_LQEta","_nVtx","_nVtx_NoPU"]
     
 
 #    Isolation=["_Iso", "_AntiIso","_Total"]
     Isolation=["_Iso"]
 #    MT=["_NoMT"]
-    MT= ["_NoMT","_LowMT","_HighMT"]
+    MT= ["_NoMT","_HighMT"]
 #    JPT=["_LowDPhi", "_HighDPhi"];
     JPT=[ "_HighDPhi"]
     lqEta= ["_Barrel", "_Endcap","_TotEta"]

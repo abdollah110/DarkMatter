@@ -62,16 +62,19 @@ def _FileReturn(Name, channel,cat,HistoName,PostFixJet):
 def MakeTheHistogram(channel,NormMC,NormQCD,ShapeQCD,chl,Binning):
     
     
-    signal = ['Codex_']
+    signal = ['DM_Codex_']
     signalName = ['Codex_']
     mass = [
     '1000',
+    '1200',
     '1400',
-    '1800'
+    '1600',
+    '1800',
+    '2000'
     ]
 
 
-    TOTMASS = ['1000','1400','1800']
+    TOTMASS = ['1000','1200','1400','1600','1800','2000']
     category = [""]
 
     
@@ -318,7 +321,7 @@ if __name__ == "__main__":
 
 
     Met_Cat= ["_MET200", "_MET250","_MET300", "_MET350","_MET400"]
-    MT_Cat = ["_MT100", "_MT150","_MT200"]
+    MT_Cat = ["_MT0", "_MT50","_MT100"]
 
     for met in Met_Cat:
         for mt in MT_Cat:

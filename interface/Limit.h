@@ -168,6 +168,13 @@ Dataset: /DM_Codex_2000_900_990/abdollah-GEN-SIM-8ecf21deb7c86694de43d2ad8e8e229
 
 
 
+hadd DM_Codex_1000.root   crab_DM_Codex_1000*.root
+hadd DM_Codex_1200.root   crab_DM_Codex_1200*.root
+hadd DM_Codex_1400.root   crab_DM_Codex_1400*.root
+hadd DM_Codex_1600.root   crab_DM_Codex_1600*.root
+hadd DM_Codex_1800.root   crab_DM_Codex_1800*.root
+hadd DM_Codex_2000.root   crab_DM_Codex_2000*.root
+
 
 
 
