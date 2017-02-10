@@ -6,6 +6,7 @@ The github repository is : https://github.com/abdollah110/DarkMatter
 This is the code that we do the pre-selection and used for background estimation and closure test studies and make the control plots. Here is how one can run this code;
 -First one needs to compile it with:
 
+```shell
 ./Make.sh CodexAnalyzer_Preselection.cc
 ./CodexAnalyzer_Preselection.exe  OutFiles_PreSelection/DYJetsToLL.root ../ROOT80X/DIR/DYJetsToLL_M-50*.root
 ./CodexAnalyzer_Preselection.exe  OutFiles_PreSelection/TTJets.root ../ROOT80X/DIR/Inclusive_TTJets.root
@@ -13,12 +14,13 @@ This is the code that we do the pre-selection and used for background estimation
 ./CodexAnalyzer_Preselection.exe  OutFiles_PreSelection/VV.root ../ROOT80X/DIR/ZZ.root  ../ROOT80X/DIR/WW.root  ../ROOT80X/DIR/WZ.root
 ./CodexAnalyzer_Preselection.exe  OutFiles_PreSelection/SingleTop.root ../ROOT80X/DIR/ST_*.root
 ./CodexAnalyzer_Preselection.exe  OutFiles_PreSelection/Data.root ../ROOT80X/DIR/SingleMu.root
-
+```
 
 
 *CodexAnalyzer_FinalSelection.cc*
 This code is used for Making the final root files, including all the shape systematics, i.e. JES, Top pt reweighting sys, ….
 
+```shell
 ./Make.sh CodexAnalyzer_FinalSelection.cc
 ./CodexAnalyzer_FinalSelection.exe  OutFiles_FullSelection/DYJetsToLL.root ../ROOT80X/DYJetsToLL_M-50*.root
 ./CodexAnalyzer_FinalSelection.exe  OutFiles_FullSelection/TTJets.root ../ROOT80X/Inclusive_TTJets.root
@@ -26,7 +28,7 @@ This code is used for Making the final root files, including all the shape syste
 ./CodexAnalyzer_FinalSelection.exe  OutFiles_FullSelection/VV.root ../ROOT80X/ZZ.root  ../ROOT80X/WW.root  ../ROOT80X/WZ.root
 ./CodexAnalyzer_FinalSelection.exe  OutFiles_FullSelection/SingleTop.root ../ROOT80X/ST_*.root
 ./CodexAnalyzer_FinalSelection.exe  OutFiles_FullSelection/Data.root ../ROOT80X/SingleMu.root
-
+```
 
 *CodexAnalyzer_QCDEstim.cc*
 This code is used to do the closure test on QCD background estimation
