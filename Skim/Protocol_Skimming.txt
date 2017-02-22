@@ -1,0 +1,41 @@
+To make skimming over ggNtuples 6 files are needed:
+
+Skimmer.cc (the .cc code where the skimming is defined here)
+Skimmer.h (header file)
+Makefile (used to compile Skimmer.cc)
+Submit_batch.jdl  (where condor parameters are defined)
+Submit_run.sh   (instruct condor how to run the jobs)
+InputSamples.txt  (where the list of all samples are stored)
+
+
+Skimmer.h needs to get updated whenever here is a change in the definition of the tress in the ggNtuples (some changes might be foreseen in Skimmer.cc as well)
+To get the proper Skimmer.h one needs to run the latest ggNtuple on a test sample and save the output with ggtree_mc.root.
+
+root -l ggtree_mc.root
+TFile *_file0 = TFile::Open("ggtree_mc.root")
+_file0->cd(“ggNtuplizer”)
+EventTree->MakeClass(“Class”)
+
+The last command generates Class.h and Class.cc from TTree: EventTree
+
+Now all needed is to copy and paste 4 pieces from Class.h in the Skimmer.h
+
+ // Declaration of leaf types
+ // List of branches
+ // Set object pointer
+ // Set branch addresses and branch pointers
+
+Now check the Skimmer.C and decide which branches you want to save in the skimming ntuple and which to drop
+
+ 
+Steps to skim the ggNtuple:
+1) Update the .cc file and add your filtering skim
+2)Compile the .cc file (Makefile)
+3)List all samples you intend to make skim (from /Data   or /MC directory in eos area)
+4)In the Submit_batch.jdl file multiply the number of the samples to 10 and quote this number in front of the Queue
+
+Now you are ready to submit jobs to condor:  
+
+By running : condor_submit Submit_batch.jdl
+
+at the end you need to hadd the root files 

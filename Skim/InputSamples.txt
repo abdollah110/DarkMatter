@@ -1,0 +1,2 @@
+/MC/LQToBTau_M-300_BetaOne_TuneCUETP8M1_13TeV-pythia8/crab_LQToBTau_M-350_BetaOne_TuneCUETP8M1_13TeV-pythia8/170214_002917/0000
+
