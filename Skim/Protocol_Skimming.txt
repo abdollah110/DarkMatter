@@ -3,9 +3,9 @@ To make skimming over ggNtuples 6 files are needed:
 Skimmer.cc (the .cc code where the skimming is defined here)
 Skimmer.h (header file)
 Makefile (used to compile Skimmer.cc)
-Submit_batch.jdl  (where condor parameters are defined)
+Submit_batch.jdl  (where condor parameters are defined. Note: you need to change the location of the runPath!!)
 Submit_run.sh   (instruct condor how to run the jobs)
-InputSamples.txt  (where the list of all samples are stored)
+InputSamples.txt  (where the list of all samples are stored. More info at  snagSample.py)
 
 
 Skimmer.h needs to get updated whenever here is a change in the definition of the tress in the ggNtuples (some changes might be foreseen in Skimmer.cc as well)
