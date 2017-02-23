@@ -44,7 +44,7 @@ echo $PWD , "for job running"
 cp $RUNPATH/Skimmer.cc .
 cp $RUNPATH/Skimmer.h .
 cp $RUNPATH/Makefile .
-cp $RUNPATH/ListName.txt .
+cp $RUNPATH/InputSamples.txt .
 
 
 
@@ -52,7 +52,7 @@ cp $RUNPATH/ListName.txt .
 
 #########  Smaple/Job splitting
 SplitingNumber=10
-DataSetArray=($(cat ListName.txt)) # array of the input datadets
+DataSetArray=($(cat InputSamples.txt)) # array of the input datadets
 echo ${DataSetArray[$PROCESS / $SplitingNumber]}
 DataSetName=${DataSetArray[$PROCESS / $SplitingNumber]}
 rootNumber=$(($PROCESS % $SplitingNumber))
@@ -86,7 +86,7 @@ hadd -f $OutName "skimed_"*.root
 
 
 ##########  remove the unneccesat files
-rm skim*root  Skimmer.cc  Skimmer.h  Makefile  ListName.txt
+rm skim*root  Skimmer.cc  Skimmer.h  Makefile  InputSamples.txt
 echo "Done execution ..."
 
 
