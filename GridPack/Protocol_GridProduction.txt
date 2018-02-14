@@ -1,3 +1,5 @@
+/afs/cern.ch/work/a/abdollah/scratch1/GenStudy/CMSSW_7_1_21_patch1/src/genproductions/bin/MadGraph5_aMCatNLO
+
 Steps to make GridPack “now for Dark Matter in Coannihilation” signal
 
 
