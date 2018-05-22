@@ -3,6 +3,7 @@ Here we start with Gridpack (Starting from LHE files would be very similar)
 
 =========== Step1
 CMSSW_7_1_21_patch1
+[For me this is done in cmslpc  /uscms_data/d3/abdollah/DM/CMSSW_7_1_21_patch1/src ]
 In this step we need to submit jobs via crab. The input would be the gridpacks. The output would the pLHW or wmLHE files which will be piblished in the eos area.
 The needed files are as following:
 
